@@ -1,0 +1,19 @@
+[Unit]
+Description=Prometheus server container for homelab monitoring
+
+[Container]
+AutoUpdate=registry
+ContainerName=prometheus
+Exec=--config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus --storage.tsdb.retention.time=90d --web.console.libraries=/etc/prometheus/console_libraries --web.console.templates=/etc/prometheus/consoles --web.enable-lifecycle
+Image=docker.io/prom/prometheus
+Network=homelab-monitoring.network
+PublishPort=9090:9090
+Volume=%h/homelab-monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+Volume=prometheus.volume:/prometheus
+
+[Service]
+Restart=always
+
+[Install]
+# Start automtically by default on boot
+WantedBy=default.target

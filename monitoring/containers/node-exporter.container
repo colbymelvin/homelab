@@ -1,0 +1,20 @@
+[Unit]
+Description=Prometheus exporter container for homelab monitoring
+
+[Container]
+AutoUpdate=registry
+ContainerName=node-exporter
+Exec=--path.procfs=/host/proc --path.rootfs=/rootfs --path.sysfs=/host/sys --collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)
+Image=docker.io/prom/node-exporter
+Network=homelab-monitoring.network
+PublishPort=9100:9100
+Volume=/proc:/host/proc:ro
+Volume=/sys:/host/sys:ro
+Volume=/:/rootfs:ro
+
+[Service]
+Restart=always
+
+[Install]
+# Start automtically by default on boot
+WantedBy=default.target

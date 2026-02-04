@@ -1,0 +1,21 @@
+[Unit]
+Description=Home Assistant container for homelab
+
+[Container]
+AutoUpdate=registry
+ContainerName=homeassistant
+Image=docker.io/homeassistant/home-assistant:stable
+Network=host
+Volume=homeassistant.volume:/config
+Volume=/etc/localtime:/etc/localtime:ro
+Volume=/run/dbus:/run/dbus:ro
+Environment=TZ=America/New_York
+Environment=DISABLE_JEMALLOC=true
+
+[Service]
+Restart=unless-stopped
+TimeoutStartSec=10min
+
+[Install]
+# Start automtically by default on boot
+WantedBy=default.target

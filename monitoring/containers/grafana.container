@@ -1,0 +1,17 @@
+[Unit]
+Description=Grafana container for homelab monitoring
+
+[Container]
+AutoUpdate=registry
+ContainerName=grafana
+Image=docker.io/grafana/grafana-oss
+Network=homelab-monitoring.network
+PublishPort=3000:3000
+Volume=grafana.volume:/var/lib/grafana
+
+[Service]
+Restart=always
+
+[Install]
+# Start automtically by default on boot
+WantedBy=default.target
