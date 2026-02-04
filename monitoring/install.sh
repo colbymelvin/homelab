@@ -6,8 +6,8 @@ loginctl enable-linger
 
 # Copy container files to ~/.config/containers/systemd
 # See also https://docs.podman.io/en/latest/markdown/podman-systemd.unit.5.html#podman-rootless-unit-search-path
-mkdir -p ~/.config/containers/systemd/homelab-monitoring
-cp -a containers/. ~/.config/containers/systemd/homelab-monitoring/
+mkdir -p ~/.config/containers/systemd/homelab/monitoring
+cp -a containers/. ~/.config/containers/systemd/homelab/monitoring/
 
 # Reload unit files and rebuild dependency trees 
 systemctl --user daemon-reload
@@ -16,3 +16,4 @@ systemctl --user daemon-reload
 systemctl --user start grafana
 systemctl --user start node-exporter
 systemctl --user start prometheus
+
