@@ -1,15 +1,15 @@
 ## Description
 
-A repository containing the various applications and services runnings on my Raspberry Pi based homelab.
+A repository containing the various services running on my Raspberry Pi based homelab.
 
-Each application or service is run via [Podman](https://podman.io/) using systemd units via [rootless Podman Quadlets](https://docs.podman.io/en/latest/markdown/podman-systemd.unit.5.html#podman-rootless-unit-search-path).
+Each service is run via [Podman](https://podman.io/) using systemd units via [rootless Podman Quadlets](https://docs.podman.io/en/latest/markdown/podman-systemd.unit.5.html#podman-rootless-unit-search-path).
 
 See also [documentation regarding running Podman in a rootless environment](https://github.com/containers/podman/blob/main/docs/tutorials/rootless_tutorial.md).
 
 ## Requirements
 
 1. A Linux distribution with systemd, git, and internet access.
-2. Podman v4.4.0+ is required because Quadlet support shipped with Podman v4.4.0.
+2. Podman v4.4.0+
 
 ### A note about Debian
 
@@ -23,7 +23,7 @@ $ sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --daemo
 $ nix-env --install --attr nixpkgs.podman
 ```
 
-I also had to do the following:
+I also had to move Podman's systemd generators to the correct directories:
 
 ```bash
 sudo cp ~/.nix-profile/lib/systemd/system-generators/podman-system-generator /usr/lib/systemd/system-generators/
@@ -32,12 +32,26 @@ sudo cp ~/.nix-profile/lib/systemd/user-generators/podman-user-generator /usr/li
 
 ## Suggestions
 
-In the case of a Raspberry Pi, it is optional but preferred to serve the root filesystem on something other than the SD card. The intention of this repo is to stand up a robust monitoring stack with reasonably long data retention, i.e. lots of filesystem operations that are prone to corrupting an SD card.
+In the case of a Raspberry Pi, it is optional but preferred to serve the root filesystem on something other than the SD card. The intention of this repo is to stand up a robust homelab stack with reasonably long data retention, i.e. lots of filesystem operations that are prone to corrupting an SD card.
 
-## Instructions
+## Installing services
 
 - Clone this repo
-- `./install.sh` to move .container, .network, and .volume files into the expected location, and start the systemd services.
+- Install and start the systemd services:
+
+```bash
+./install.sh # install and start all services
+./install.sh homeassistant monitoring # install and start homeassistant and monitoring services
+```
+
+## Uninstalling services
+
+- Stop and uninstall the systemd services:
+
+```bash
+./uninstall.sh # stop and uninstall all services
+./uninstall.sh homeassistant monitoring # stop and uninstall homeassistant and monitoring services
+```
 
 ## Goals
 
