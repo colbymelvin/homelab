@@ -17,6 +17,5 @@ scrape_configs:
     authorization:
       credentials_file: "/run/secrets/prometheus_home_assistant_token"
 
-    scheme: http
     static_configs:
       - targets: ['homeassistant:8123']
