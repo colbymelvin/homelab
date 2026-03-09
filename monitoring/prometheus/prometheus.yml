@@ -19,4 +19,4 @@ scrape_configs:
 
     scheme: http
     static_configs:
-      - targets: ['homelab.local:8123']
+      - targets: ['homeassistant:8123']
