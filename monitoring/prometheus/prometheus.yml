@@ -19,4 +19,4 @@ scrape_configs:
 
     scheme: https
     static_configs:
-      - targets: ['HOSTNAME:8123']
+      - targets: ['homelab.local:8123']
