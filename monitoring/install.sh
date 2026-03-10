@@ -4,6 +4,10 @@ set -eou pipefail
 # Enable linger so the rootless user services can be started without the user being logged in
 loginctl enable-linger
 
+# Create credentials files for authenticated Prometheus/metrics endpoints if they don't exist
+mkdir -p prometheus/secrets/
+touch prometheus/secrets/home_assistant_token
+
 # Copy container files to ~/.config/containers/systemd
 # See also https://docs.podman.io/en/latest/markdown/podman-systemd.unit.5.html#podman-rootless-unit-search-path
 mkdir -p ~/.config/containers/systemd/homelab/monitoring

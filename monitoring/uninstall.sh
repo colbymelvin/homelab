@@ -12,3 +12,5 @@ rm -rf ~/.config/containers/systemd/homelab/monitoring/
 # Reload unit files and rebuild dependency trees 
 systemctl --user daemon-reload
 
+# Clean up credentials files
+rm -rf prometheus/secrets/
