@@ -4,7 +4,7 @@ Description=Prometheus server container for homelab monitoring
 [Container]
 AutoUpdate=registry
 ContainerName=prometheus
-Exec=--config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus --storage.tsdb.retention.time=90d --web.console.libraries=/etc/prometheus/console_libraries --web.console.templates=/etc/prometheus/consoles --web.enable-lifecycle
+Exec=--config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus --storage.tsdb.retention.time=18m --storage.tsdb.retention.size=200GB --web.console.libraries=/etc/prometheus/console_libraries --web.console.templates=/etc/prometheus/consoles --web.enable-lifecycle
 Image=docker.io/prom/prometheus
 Network=homelab-monitoring.network
 PublishPort=9090:9090
