@@ -12,6 +12,7 @@ scrape_configs:
 
   - job_name: "hass"
     scrape_interval: 60s
+    scrape_timeout: 30s
     metrics_path: /api/prometheus
 
     authorization:
