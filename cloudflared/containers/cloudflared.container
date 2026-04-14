@@ -7,7 +7,6 @@ ContainerName=cloudflared
 Exec=tunnel run
 Image=docker.io/cloudflare/cloudflared
 Network=host
-Network=homelab-monitoring
 Secret=cloudflared_tunnel_token,type=env,target=TUNNEL_TOKEN
 
 [Service]
