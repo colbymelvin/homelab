@@ -1,0 +1,18 @@
+[Unit]
+Description=cloudflared container for remotely accessing homelab via Cloudflare Tunnel
+
+[Container]
+AutoUpdate=registry
+ContainerName=cloudflared
+Exec=tunnel run
+Image=docker.io/cloudflare/cloudflared
+Network=host
+Network=homelab-monitoring
+Secret=cloudflared_tunnel_token,type=env,target=TUNNEL_TOKEN
+
+[Service]
+Restart=unless-stopped
+
+[Install]
+# Start automtically by default on boot
+WantedBy=default.target
