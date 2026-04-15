@@ -19,4 +19,4 @@ scrape_configs:
       credentials_file: "/run/secrets/prometheus/home_assistant_token"
 
     static_configs:
-      - targets: ['host.containers.internal:8123']
+      - targets: ['homeassistant:8123']
