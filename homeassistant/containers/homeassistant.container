@@ -6,6 +6,7 @@ AutoUpdate=registry
 ContainerName=homeassistant
 Image=docker.io/homeassistant/home-assistant:stable
 Network=homelab.network
+PublishPort=8123:8123
 Volume=homeassistant.volume:/config
 Volume=/etc/localtime:/etc/localtime:ro
 Volume=/run/dbus:/run/dbus:ro
