@@ -6,7 +6,7 @@ AutoUpdate=registry
 ContainerName=cloudflared
 Exec=tunnel run
 Image=docker.io/cloudflare/cloudflared
-Network=host
+Network=homelab.network
 Secret=cloudflared_tunnel_token,type=env,target=TUNNEL_TOKEN
 
 [Service]

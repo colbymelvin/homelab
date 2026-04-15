@@ -5,6 +5,7 @@ Description=Home Assistant container for homelab
 AutoUpdate=registry
 ContainerName=homeassistant
 Image=docker.io/homeassistant/home-assistant:stable
+Network=homelab.network
 Network=host
 Volume=homeassistant.volume:/config
 Volume=/etc/localtime:/etc/localtime:ro
