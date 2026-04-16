@@ -4,18 +4,16 @@ set -eou pipefail
 # Enable linger so the rootless user services can be started without the user being logged in
 loginctl enable-linger
 
+# Create a secret to be piped into the container as TUNNEL_TOKEN.
+# See also: containers/cloudflared.container
+secret_name=cloudflared_tunnel_token
+read -rs -p "Enter value for $secret_name: " token; echo
+printf '%s' "$token" | podman secret create $secret_name -
+
 # Copy container files to ~/.config/containers/systemd
 # See also https://docs.podman.io/en/latest/markdown/podman-systemd.unit.5.html#podman-rootless-unit-search-path
 mkdir -p ~/.config/containers/systemd/homelab/cloudflared
 cp -a containers/. ~/.config/containers/systemd/homelab/cloudflared/
-
-##########################
-# Handle secret generation
-##########################
-
-trap 'echo -e "\nAborted."; exit 1' INT
-read -rs -p "Enter token (Ctrl+C to cancel): " TOKEN; echo
-printf '%s' "$TOKEN" | podman secret create cloudflared_tunnel_token -
 
 # Reload unit files and rebuild dependency trees
 systemctl --user daemon-reload

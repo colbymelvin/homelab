@@ -5,8 +5,12 @@ set -eou pipefail
 loginctl enable-linger
 
 # Create credentials files for authenticated Prometheus/metrics endpoints if they don't exist
+# See also: containers/prometheus.container and prometheus/prometheus.yml
 mkdir -p prometheus/secrets/
-touch prometheus/secrets/home_assistant_token
+home_assistant_secret_file="prometheus/secrets/home_assistant_token"
+read -rs -p "Enter value for $home_assistant_secret_file: " token; echo
+printf '%s\n' "$token" > "$home_assistant_secret_file"
+chmod 600 "$home_assistant_secret_file"
 
 # Copy container files to ~/.config/containers/systemd
 # See also https://docs.podman.io/en/latest/markdown/podman-systemd.unit.5.html#podman-rootless-unit-search-path
