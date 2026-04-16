@@ -5,6 +5,7 @@ set -eou pipefail
 loginctl enable-linger
 
 # Create credentials files for authenticated Prometheus/metrics endpoints if they don't exist
+# See also: containers/prometheus.container and prometheus/prometheus.yml
 mkdir -p prometheus/secrets/
 home_assistant_secret_file="prometheus/secrets/home_assistant_token"
 read -rs -p "Enter value for $home_assistant_secret_file: " token; echo
