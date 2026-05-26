@@ -7,6 +7,9 @@ systemctl --user stop cloudflared
 # Remove the container files from ~/.config/containers/systemd
 rm -rf ~/.config/containers/systemd/homelab/cloudflared/
 
-# Reload unit files and rebuild dependency trees 
+# Remove the tunnel token secret file
+rm -f secrets/cloudflared_tunnel_token
+
+# Reload unit files and rebuild dependency trees
 systemctl --user daemon-reload
 
