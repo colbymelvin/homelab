@@ -4,13 +4,26 @@ set -eou pipefail
 # Enable linger so the rootless user services can be started without the user being logged in
 loginctl enable-linger
 
-# Create credentials files for authenticated Prometheus/metrics endpoints if they don't exist
+# Write the Home Assistant token to a file for authenticated Prometheus scraping.
 # See also: containers/prometheus.container and prometheus/prometheus.yml
 mkdir -p prometheus/secrets/
-home_assistant_secret_file="prometheus/secrets/home_assistant_token"
-read -rs -p "Enter value for $home_assistant_secret_file: " token; echo
-printf '%s\n' "$token" > "$home_assistant_secret_file"
-chmod 644 "$home_assistant_secret_file"
+secret_file="prometheus/secrets/home_assistant_token"
+file_exists=false
+overwrite=false
+if [[ -f "$secret_file" ]]; then
+    file_exists=true
+    read -r -p "$secret_file already exists. Overwrite? [y/N] " confirm; echo
+    if [[ "${confirm,,}" == "y" ]]; then
+        overwrite=true
+    else
+        echo "Keeping existing $secret_file"
+    fi
+fi
+if [[ "$file_exists" == false || "$overwrite" == true ]]; then
+    read -rs -p "Enter value for $secret_file: " token; echo
+    printf '%s\n' "$token" > "$secret_file"
+    chmod 644 "$secret_file"
+fi
 
 # Copy container files to ~/.config/containers/systemd
 # See also https://docs.podman.io/en/latest/markdown/podman-systemd.unit.5.html#podman-rootless-unit-search-path

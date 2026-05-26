@@ -9,6 +9,9 @@ systemctl --user stop prometheus
 # Remove the container files from ~/.config/containers/systemd
 rm -rf ~/.config/containers/systemd/homelab/monitoring/
 
-# Reload unit files and rebuild dependency trees 
+# Remove the Home Assistant token secret file
+rm -f prometheus/secrets/home_assistant_token
+
+# Reload unit files and rebuild dependency trees
 systemctl --user daemon-reload
 
