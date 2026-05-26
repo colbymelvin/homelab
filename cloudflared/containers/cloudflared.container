@@ -7,7 +7,7 @@ ContainerName=cloudflared
 Exec=tunnel run
 Image=docker.io/cloudflare/cloudflared
 Network=homelab.network
-Secret=cloudflared_tunnel_token,type=env,target=TUNNEL_TOKEN
+EnvironmentFile=%h/homelab/cloudflared/secrets/cloudflared_tunnel_token
 
 [Service]
 Restart=unless-stopped
