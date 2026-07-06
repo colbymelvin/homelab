@@ -14,7 +14,7 @@ Environment=TZ=America/New_York
 Environment=DISABLE_JEMALLOC=true
 
 [Service]
-Restart=unless-stopped
+Restart=always
 TimeoutStartSec=10min
 
 [Install]
