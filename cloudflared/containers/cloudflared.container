@@ -10,7 +10,8 @@ Network=homelab.network
 EnvironmentFile=%h/homelab/cloudflared/secrets/cloudflared_tunnel_token
 
 [Service]
-Restart=unless-stopped
+Restart=always
+RestartSec=10
 
 [Install]
 # Start automtically by default on boot
