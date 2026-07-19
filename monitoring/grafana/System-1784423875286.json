@@ -111,7 +111,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "avg by (cpu) (\n  sum without (mode) (\n    rate(node_cpu_seconds_total{mode!=\"idle\",mode!=\"iowait\",mode!=\"steal\"}[1m])\n  )\n)",
+          "expr": "avg by (cpu) (\n  sum without (mode) (\n    rate(node_cpu_seconds_total{mode!=\"idle\",mode!=\"steal\"}[1m])\n  )\n)",
           "legendFormat": "CPU {{cpu}}",
           "range": true,
           "refId": "A",
@@ -177,7 +177,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum without (instance) ((node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes)",
+          "expr": "1 - node_memory_MemAvailable_bytes/ node_memory_MemTotal_bytes",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A",
@@ -311,7 +311,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum without (instance) ((node_filesystem_size_bytes{device=\"/dev/sda1\"} - node_filesystem_avail_bytes{device=\"/dev/sda1\"}) / node_filesystem_size_bytes{device=\"/dev/sda1\"})",
+          "expr": "1 -  node_filesystem_avail_bytes{device=\"/dev/sda1\"} / node_filesystem_size_bytes{device=\"/dev/sda1\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A",
@@ -412,7 +412,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "avg by (cpu) (\n  sum without (mode) (\n    rate(node_cpu_seconds_total{mode!=\"idle\",mode!=\"iowait\",mode!=\"steal\"}[1m])\n  )\n)",
+          "expr": "avg by (cpu) (\n  sum without (mode) (\n    rate(node_cpu_seconds_total{mode!=\"idle\",mode!=\"steal\"}[2m])\n  )\n)",
           "legendFormat": "CPU {{cpu}}",
           "range": true,
           "refId": "A"
@@ -505,7 +505,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum without (instance) ((node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes)",
+          "expr": "1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A",
@@ -751,6 +751,6 @@
   "timezone": "browser",
   "title": "System",
   "uid": "0a8d76a5-91ed-4641-a901-ac0c7725b095",
-  "version": 36,
+  "version": 41,
   "weekStart": ""
 }
