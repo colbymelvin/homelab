@@ -3,7 +3,7 @@ Description=Grafana container for homelab monitoring
 
 [Container]
 ContainerName=grafana
-Image=docker.io/grafana/grafana-oss:12.0.0
+Image=docker.io/grafana/grafana-oss:13.0.2
 Network=homelab.network
 PublishPort=3000:3000
 Volume=grafana.volume:/var/lib/grafana
