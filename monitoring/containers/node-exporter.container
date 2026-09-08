@@ -4,7 +4,7 @@ Description=Prometheus exporter container for homelab monitoring
 [Container]
 ContainerName=node-exporter
 Exec=--path.procfs=/host/proc --path.rootfs=/rootfs --path.sysfs=/host/sys --collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)
-Image=docker.io/prom/node-exporter:v1.9.1
+Image=docker.io/prom/node-exporter:v1.12.1
 Network=homelab.network
 PublishPort=9100:9100
 Volume=/proc:/host/proc:ro
