@@ -3,7 +3,7 @@ Description=Home Assistant container for homelab
 
 [Container]
 ContainerName=homeassistant
-Image=docker.io/homeassistant/home-assistant:2026.1.3
+Image=docker.io/homeassistant/home-assistant:2026.9.1
 Network=homelab.network
 PublishPort=8123:8123
 Volume=homeassistant.volume:/config
