@@ -17,7 +17,7 @@ stop_units() {
 
 remove_secret() {
   local service="$1"
-  local secrets_file="$ROOT_DIR/$service/secrets"
+  local secrets_file="$ROOT_DIR/$service/secrets.conf"
   # Explicit `return 0`: under `set -e`, a bare `return` propagates the failing
   # test's exit status and aborts the script.
   [[ -f "$secrets_file" ]] || return 0
