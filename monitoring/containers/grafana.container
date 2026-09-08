@@ -2,9 +2,8 @@
 Description=Grafana container for homelab monitoring
 
 [Container]
-AutoUpdate=registry
 ContainerName=grafana
-Image=docker.io/grafana/grafana-oss
+Image=docker.io/grafana/grafana-oss:12.0.0
 Network=homelab.network
 PublishPort=3000:3000
 Volume=grafana.volume:/var/lib/grafana
