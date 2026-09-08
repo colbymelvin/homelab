@@ -18,11 +18,13 @@ stop_units() {
 remove_secret() {
   local service="$1"
   local secrets_file="$ROOT_DIR/$service/secrets"
-  [[ -f "$secrets_file" ]] || return
+  # Explicit `return 0`: under `set -e`, a bare `return` propagates the failing
+  # test's exit status and aborts the script.
+  [[ -f "$secrets_file" ]] || return 0
 
   local path _env_var
   read -r path _env_var < <(sed -E 's/#.*$//' "$secrets_file" | awk 'NF{print;exit}')
-  [[ -z "${path:-}" ]] && return
+  [[ -z "${path:-}" ]] && return 0
 
   rm -f "$ROOT_DIR/$service/$path"
 }
