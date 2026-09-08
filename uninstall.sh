@@ -2,27 +2,50 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SYSTEMD_DIR="$HOME/.config/containers/systemd/homelab"
+
+stop_units() {
+  local service="$1"
+  for f in "$ROOT_DIR/$service"/containers/*.container; do
+    [[ -e "$f" ]] || continue
+    local unit
+    unit=$(basename "$f" .container)
+    echo "Stopping $unit"
+    systemctl --user stop "$unit" || true
+  done
+}
+
+remove_secret() {
+  local service="$1"
+  local secrets_file="$ROOT_DIR/$service/secrets"
+  [[ -f "$secrets_file" ]] || return
+
+  local path _env_var
+  read -r path _env_var < <(sed -E 's/#.*$//' "$secrets_file" | awk 'NF{print;exit}')
+  [[ -z "${path:-}" ]] && return
+
+  rm -f "$ROOT_DIR/$service/$path"
+}
+
+remove_containers() {
+  local service="$1"
+  rm -rf "$SYSTEMD_DIR/$service"
+}
 
 uninstall_service() {
   local service="$1"
-  local service_dir="$ROOT_DIR/$service"
-  local script="$service_dir/uninstall.sh"
 
-  if [[ ! -d "$service_dir" ]]; then
+  if [[ ! -d "$ROOT_DIR/$service" ]]; then
     echo "Service '$service' does not exist"
     exit 1
   fi
 
-  if [[ ! -x "$script" ]]; then
-    echo "Skipping '$service' (no executable uninstall.sh)"
-    return
-  fi
-
-  echo "Uninstalling $service"
-  (cd "$service_dir" && ./uninstall.sh)
+  echo "==> Uninstalling $service"
+  remove_containers "$service"
+  remove_secret "$service"
 }
 
-# If no args, uninstall everything (each child directory)
+# Determine which services to uninstall
 if [[ $# -eq 0 ]]; then
   mapfile -t SERVICES < <(
     find "$ROOT_DIR" \
@@ -37,7 +60,14 @@ else
   SERVICES=("$@")
 fi
 
+# Stop units before removing anything so systemd sees a clean shutdown
+for service in "${SERVICES[@]}"; do
+  stop_units "$service"
+done
+
 for service in "${SERVICES[@]}"; do
   uninstall_service "$service"
 done
 
+# One daemon-reload after all removals
+systemctl --user daemon-reload
