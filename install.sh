@@ -8,12 +8,14 @@ NETWORKING="networking"
 prompt_secret() {
   local service="$1"
   local secrets_file="$ROOT_DIR/$service/secrets"
-  [[ -f "$secrets_file" ]] || return
+  # Explicit `return 0`: under `set -e`, a bare `return` propagates the failing
+  # test's exit status and aborts the script.
+  [[ -f "$secrets_file" ]] || return 0
 
   # Take the first non-comment, non-blank line as the spec
   local path env_var
   read -r path env_var < <(sed -E 's/#.*$//' "$secrets_file" | awk 'NF{print;exit}')
-  [[ -z "${path:-}" ]] && return
+  [[ -z "${path:-}" ]] && return 0
 
   local secret_file="$ROOT_DIR/$service/$path"
   mkdir -p "$(dirname "$secret_file")"
