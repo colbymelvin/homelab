@@ -4,7 +4,7 @@ Description=cloudflared container for remotely accessing homelab via Cloudflare 
 [Container]
 ContainerName=cloudflared
 Exec=tunnel run
-Image=docker.io/cloudflare/cloudflared:2026.8.3
+Image=docker.io/cloudflare/cloudflared:2026.9.0
 Network=homelab.network
 EnvironmentFile=%h/homelab/cloudflared/secrets/cloudflared_tunnel_token
 
