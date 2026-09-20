@@ -5,7 +5,7 @@ Description=Prometheus server container for homelab monitoring
 ContainerName=prometheus
 Exec=--config.file=/etc/prometheus/prometheus.yml \
     --storage.tsdb.path=/prometheus \
-    --storage.tsdb.retention.time=2y \
+    --storage.tsdb.retention.time=30d \
     --storage.tsdb.retention.size=250GB \
     --web.console.libraries=/etc/prometheus/console_libraries \
     --web.console.templates=/etc/prometheus/consoles \
