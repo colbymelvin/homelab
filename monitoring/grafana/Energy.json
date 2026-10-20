@@ -21,7 +21,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "12.0.0"
+      "version": "12.4.13"
     },
     {
       "type": "datasource",
@@ -55,7 +55,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": null,
   "links": [],
   "panels": [
     {
@@ -75,7 +74,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "semi-dark-blue"
+                "color": "semi-dark-blue",
+                "value": 0
               },
               {
                 "color": "green",
@@ -103,9 +103,7 @@
         "minVizWidth": 75,
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -113,9 +111,13 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.4.13",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "disableTextWrap": false,
           "editorMode": "builder",
           "expr": "sum by(friendly_name) (hass_sensor_temperature_celsius{friendly_name=\"Living Room Temperature\"}) * 1.8 + 32",
@@ -124,11 +126,7 @@
           "legendFormat": "__auto",
           "range": true,
           "refId": "A",
-          "useBackend": false,
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          }
+          "useBackend": false
         },
         {
           "datasource": {
@@ -139,7 +137,6 @@
           "editorMode": "builder",
           "expr": "sum by(friendly_name) (hass_sensor_temperature_celsius{friendly_name=\"Upstairs Temperature\"}) * 1.8 + 32",
           "fullMetaSearch": false,
-          "hide": false,
           "includeNullMetadata": true,
           "instant": false,
           "legendFormat": "__auto",
@@ -168,7 +165,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -192,9 +190,7 @@
         "minVizWidth": 75,
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -202,7 +198,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.4.13",
       "targets": [
         {
           "datasource": {
@@ -213,7 +209,6 @@
           "editorMode": "builder",
           "expr": "sum by(friendly_name) (hass_sensor_humidity_percent{friendly_name=\"Living Room Humidity\"})",
           "fullMetaSearch": false,
-          "hide": false,
           "includeNullMetadata": true,
           "instant": false,
           "legendFormat": "__auto",
@@ -230,7 +225,6 @@
           "editorMode": "builder",
           "expr": "sum by(friendly_name) (hass_sensor_humidity_percent{friendly_name=\"Upstairs Humidity\"})",
           "fullMetaSearch": false,
-          "hide": false,
           "includeNullMetadata": true,
           "instant": false,
           "legendFormat": "__auto",
@@ -276,6 +270,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -290,7 +285,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -466,7 +462,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.4.13",
       "targets": [
         {
           "datasource": {
@@ -490,7 +486,6 @@
           },
           "editorMode": "builder",
           "expr": "hass_sensor_temperature_celsius{friendly_name=\"OpenWeatherMap Temperature\"} * 1.8 + 32",
-          "hide": false,
           "instant": false,
           "legendFormat": "{{friendly_name}}",
           "range": true,
@@ -505,7 +500,6 @@
           "editorMode": "builder",
           "expr": "sum by(friendly_name) (hass_climate_target_temperature_high_celsius{friendly_name=\"Living Room\"}) * 1.8 + 32",
           "fullMetaSearch": false,
-          "hide": false,
           "includeNullMetadata": true,
           "instant": false,
           "legendFormat": "Target temp high",
@@ -522,7 +516,6 @@
           "editorMode": "builder",
           "expr": "sum by(friendly_name) (hass_climate_target_temperature_low_celsius{friendly_name=\"Living Room\"}) * 1.8 + 32",
           "fullMetaSearch": false,
-          "hide": false,
           "includeNullMetadata": true,
           "instant": false,
           "legendFormat": "Target temp low",
@@ -539,7 +532,6 @@
           "editorMode": "builder",
           "expr": "sum by(friendly_name) (hass_climate_action{action=\"cooling\", friendly_name=\"Living Room\"})",
           "fullMetaSearch": false,
-          "hide": false,
           "includeNullMetadata": true,
           "instant": false,
           "legendFormat": "Cooling",
@@ -556,7 +548,6 @@
           "editorMode": "builder",
           "expr": "sum by(friendly_name) (hass_climate_action{action=\"heating\", friendly_name=\"Living Room\"})",
           "fullMetaSearch": false,
-          "hide": false,
           "includeNullMetadata": true,
           "instant": false,
           "legendFormat": "Heating",
@@ -602,6 +593,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -616,7 +608,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -792,7 +785,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.4.13",
       "targets": [
         {
           "datasource": {
@@ -816,7 +809,6 @@
           },
           "editorMode": "builder",
           "expr": "hass_sensor_temperature_celsius{friendly_name=\"OpenWeatherMap Temperature\"} * 1.8 + 32",
-          "hide": false,
           "instant": false,
           "legendFormat": "{{friendly_name}}",
           "range": true,
@@ -831,7 +823,6 @@
           "editorMode": "builder",
           "expr": "sum by(friendly_name) (hass_climate_target_temperature_high_celsius{friendly_name=\"Upstairs\"}) * 1.8 + 32",
           "fullMetaSearch": false,
-          "hide": false,
           "includeNullMetadata": true,
           "instant": false,
           "legendFormat": "Target temp high",
@@ -848,7 +839,6 @@
           "editorMode": "builder",
           "expr": "sum by(friendly_name) (hass_climate_target_temperature_low_celsius{friendly_name=\"Upstairs\"}) * 1.8 + 32",
           "fullMetaSearch": false,
-          "hide": false,
           "includeNullMetadata": true,
           "instant": false,
           "legendFormat": "Target temp low",
@@ -865,7 +855,6 @@
           "editorMode": "builder",
           "expr": "sum by(friendly_name) (hass_climate_action{action=\"cooling\", friendly_name=\"Upstairs\"})",
           "fullMetaSearch": false,
-          "hide": false,
           "includeNullMetadata": true,
           "instant": false,
           "legendFormat": "Cooling",
@@ -882,7 +871,6 @@
           "editorMode": "builder",
           "expr": "sum by(friendly_name) (hass_climate_action{action=\"heating\", friendly_name=\"Upstairs\"})",
           "fullMetaSearch": false,
-          "hide": false,
           "includeNullMetadata": true,
           "instant": false,
           "legendFormat": "Heating",
@@ -928,6 +916,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -943,7 +932,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -1011,9 +1001,13 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.4.13",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
           "disableTextWrap": false,
           "editorMode": "builder",
           "expr": "sum by(friendly_name) (hass_sensor_humidity_percent)",
@@ -1022,30 +1016,27 @@
           "legendFormat": "__auto",
           "range": true,
           "refId": "A",
-          "useBackend": false,
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          }
+          "useBackend": false
         }
       ],
       "title": "Humidity",
       "type": "timeseries"
     }
   ],
-  "schemaVersion": 41,
+  "preload": false,
+  "schemaVersion": 42,
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-12h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Energy",
   "uid": "edca6f0d-c5e4-4e5f-ac8e-ac99ba68b830",
-  "version": 44,
+  "version": 1,
   "weekStart": ""
 }
