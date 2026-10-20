@@ -113,7 +113,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "avg by (cpu) (\n  sum without (mode) (\n    rate(node_cpu_seconds_total{mode!=\"idle\",mode!=\"steal\"}[2m])\n  )\n)",
+          "expr": "avg by (cpu) (\n  sum without (mode) (\n    rate(node_cpu_seconds_total{mode!=\"idle\",mode!=\"steal\"}[1m])\n  )\n)",
           "legendFormat": "CPU {{cpu}}",
           "range": true,
           "refId": "A"
@@ -409,7 +409,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "avg by (cpu) (\n  sum without (mode) (\n    rate(node_cpu_seconds_total{mode!=\"idle\",mode!=\"steal\"}[2m])\n  )\n)",
+          "expr": "avg by (cpu) (\n  sum without (mode) (\n    rate(node_cpu_seconds_total{mode!=\"idle\",mode!=\"steal\"}[1m])\n  )\n)",
           "legendFormat": "CPU {{cpu}}",
           "range": true,
           "refId": "A"
